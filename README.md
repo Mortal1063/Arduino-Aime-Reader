@@ -48,11 +48,13 @@
 
 
 ### 已知问题
-- 默认未启用 FeliCa 读写功能，仅在 `CMD_CARD_DETECT` 时读取 IDm 和 PMm，该设置可以通过 `SKIP_FeliCa_THROUGH` 控制
-- 启用 FeliCa 读写功能后，默认启用 `PN532_FeliCa_THROUGH`，FeliCa 操作命令直接转发给 PN532 处理，如果需要控制读写过程，可以禁用该定义，然后修改实现函数
-- 如果启用 FeliCa 读写功能，某些游戏可能不支持所有 FeliCa 卡种类，和官方读卡器行为一致
-- 因为 PN532 库支持的问题，未实现多卡同时读取，只会读到最先识别的卡片；刷数据不正确的 MIFARE 卡片（如交通卡、模拟卡）会导致游戏状态异常
-- 对于未适配的命令，默认回复 `STATUS_INVALID_COMMAND`，可能会导致游戏认为读卡器不可用
+
+- 默认情况下，FeliCa 读写功能处于禁用状态，仅会在 `CMD_CARD_DETECT` 指令中读取 IDm 和 PMm，可通过 `SKIP_FeliCa_THROUGH` 定义控制此行为
+- 启用 FeliCa 读写功能后，默认开启 `PN532_FeliCa_THROUGH`，所有 FeliCa 操作命令将直接转发给 PN532 处理。如需自定义读写逻辑，可禁用该定义并修改实现相关函数
+- 启用 FeliCa 读写功能后，部分游戏可能不支持所有类型的 FeliCa 卡片，这与官方读卡器的行为一致
+- 由于 PN532 库的限制，目前不支持多卡同时识别，仅处理最先识别到的卡片。
+- 如果使用不符合 Aime、Banapassport 数据格式的 MIFARE 卡（如某些交通卡或模拟卡），可能会导致游戏状态异常
+- 对于未实现的指令，默认返回 `STATUS_INVALID_COMMAND`，这可能导致某些游戏判定读卡器不可用
 
 
 ### 版本更新情况
