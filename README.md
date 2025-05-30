@@ -43,6 +43,7 @@
 | - | - | - |
 | [SparkFun Pro Micro](https://learn.sparkfun.com/tutorials/pro-micro--fio-v3-hookup-guide#hardware-overview-pro-micro) | ATmega32U4 | 需要发送 DTR/RTS |
 | [NodeMCU 1.0](https://github.com/nodemcu/nodemcu-devkit-v1.0?tab=readme-ov-file#pin-map) | ESP-12E + CH340 | |
+| Arduino Uno R3 | ATmega328P | 测试环境[ReaderTest](tools/ReaderTest/ReaderTest.ino)通过，由于游戏环境配置问题暂时没办法测试，有大佬方便测试的话可以提交issue |
 | [NodeMCU-32S](https://docs.ai-thinker.com/esp32/boards/nodemcu_32s) | ESP32-S + CH340 | 主要适配环境 |
 | Arduino Uno | ATmega328P + CH340 | 未实际测试，据反馈不可用 |
 
