@@ -6,6 +6,12 @@
 // 32U4 使用 I2C 时，执行 ReadWithoutEncryption 会失败
 // 需要修改 Wire BUFFER_LENGTH 和 TWI_BUFFER_LENGTH 为 64
 
+#elif defined(__AVR_ATmega328P__)
+#pragma message "当前的开发板是 ATmega328P"
+#define SerialDevice Serial
+#define PN532_RX 10
+#define PN532_TX 11
+
 #elif defined(ESP8266)
 #pragma message "当前的开发板是 ESP8266"
 #define SerialDevice Serial
@@ -33,6 +39,13 @@ PN532_SPI pn532(SPI, PN532_SPI_SS);
 #pragma message "使用 HSU 连接 PN532"
 #include <PN532_HSU.h>
 PN532_HSU pn532(PN532_HSU_Device);
+
+#elif (PN532_TX + PN532_RX && PN532_RX != PN532_TX)
+#pragma message "使用 SWHSU 连接 PN532"
+#include <SoftwareSerial.h>
+#include <PN532_SWHSU.h>
+SoftwareSerial SWSerial( PN532_RX, PN532_TX);
+PN532_SWHSU pn532( SWSerial );
 
 #else
 #pragma message "使用 I2C 连接 PN532"
